@@ -10,6 +10,8 @@ import { db } from "../lib/firebase";
 
 export default function Home() {
 
+    const [leftID, setLeftID] = useState('');
+
     const [leftTake, setLeftTake] = useState('Default Value Left');
     const [rightTake, setRightTake] = useState('Default Value Right');
 
@@ -20,9 +22,11 @@ export default function Home() {
 
     const [playerOneRating, setPlayerOneRating] = useState(1000);
     const [playerTwoRating, setPlayerTwoRating] = useState(1000);
-    const elo = new EloRank(10);
+    
 
     function calculateNewRatings(win:any) {
+        const elo = new EloRank(32);
+
         const expectedOne = elo.getExpected(playerOneRating, playerTwoRating);
         const expectedTwo = elo.getExpected(playerTwoRating, playerOneRating);
 

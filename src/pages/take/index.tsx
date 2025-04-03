@@ -2,11 +2,25 @@ import TopNav from "@/components/TopNav";
 import { Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../lib/firebase";
+
 
 const Take = () => {
 
     const [take, setTake] = useState('');
 
+    async function addTake() {
+        try {
+            const docRef = await addDoc(collection(db, "Takes"), {
+              content: take,
+              elo: 1000,
+              createdAt: new Date()
+            });
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
+    }
 
     function handleChange(event:any) {
         setTake(event.target.value);
@@ -14,7 +28,7 @@ const Take = () => {
 
     function handleSubmit(event:any) {
         event.preventDefault();
-        console.log(take);
+        addTake();
         setTake('');
     }
 
