@@ -4,15 +4,15 @@ import React from "react";
 const TopNav = () => {
 
     const items = [
-        {text: "Add Take", href:"#"},
-        {text: "Vote", href:"#"},
-        {text: "Leaderboard", href:"#"}
+        {text: "Add Take", href:"/take"},
+        {text: "Vote", href:"/"},
+        {text: "Leaderboard", href:"/leaderboard"}
     ];
 
     return (
         <nav className="text-white p-4">
             <div className="container mx-auto flex justify-between items-center">
-                <a href="#" className="text-xl font-bold">Hot Takes Ranked</a>
+                <a href="/" className="text-xl font-bold">Hottake Ranked</a>
                 <ul className="hidden md:flex space-x-6">
                     {items.map((item, index) => (<li key={index} className="rounded-xl hover:text-blue-400 p-2"><a href={item.href}>{item.text}</a></li>))}
                 </ul>
