@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[861],{4513:(_,e,n)=>{(window.__NEXT_P=window.__NEXT_P||[]).push(["/leaderboard",function(){return n(7626)}])},7626:(_,e,n)=>{"use strict";n.r(e),n.d(e,{default:()=>s});var r=n(7876);let s=()=>(0,r.jsx)("h1",{children:"Coming Soon..."})}},_=>{var e=e=>_(_.s=e);_.O(0,[636,593,792],()=>e(4513)),_N_E=_.O()}]);

@@ -1,16 +1,23 @@
 import TopNav from "@/components/TopNav";
 import React, { useEffect, useState } from "react";
-import { Button, createTheme, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import ResultCard from "@/components/ResultCard";
 import HotTakeCard from "@/components/HotTakeCard";
 import EloRank from "elo-rank";
 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, updateDoc, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebase";
+
+interface TakeType {
+    content: string;
+    createdAt: Date;
+    elo: number;
+}
 
 export default function Home() {
 
     const [leftID, setLeftID] = useState('');
+    const [rightID, setRightID] = useState('');
 
     const [leftTake, setLeftTake] = useState('Default Value Left');
     const [rightTake, setRightTake] = useState('Default Value Right');
@@ -24,7 +31,7 @@ export default function Home() {
     const [playerTwoRating, setPlayerTwoRating] = useState(1000);
     
 
-    function calculateNewRatings(win:any) {
+    function calculateNewRatings(win:number) {
         const elo = new EloRank(32);
 
         const expectedOne = elo.getExpected(playerOneRating, playerTwoRating);
@@ -52,16 +59,16 @@ export default function Home() {
         const querySnapshot = await getDocs(collection(db, "Takes"));
         const takes = querySnapshot.docs.map((doc) => ({
             id: doc.id,
-            ...doc.data(),
+            ...(doc.data() as TakeType),
         }));
-        let firstIndex = Math.floor(Math.random() * takes.length);
-        let firstSelection = takes[firstIndex];
+        const firstIndex = Math.floor(Math.random() * takes.length);
+        const firstSelection = takes[firstIndex];
 
         let secondIndex = Math.floor(Math.random() * takes.length);
         while (firstIndex == secondIndex) {
             secondIndex = Math.floor(Math.random() * takes.length);
         }
-        let secondSelection = takes[secondIndex];
+        const secondSelection = takes[secondIndex];
 
         setLeftTake(firstSelection.content);
         setRightTake(secondSelection.content);
@@ -69,7 +76,29 @@ export default function Home() {
         setPlayerOneRating(firstSelection.elo);
         setPlayerTwoRating(secondSelection.elo);
 
+        setLeftID(firstSelection.id);
+        setRightID(secondSelection.id);
+    }
+
+    async function postElo() {
+        if (!leftID || !rightID) {
+            return;
+        }
+        try {
+            const leftRef = doc(db, "Takes", leftID);
         
+            await updateDoc(leftRef, {
+              elo: playerOneRating,
+            });
+        
+            const rightRef = doc(db, "Takes", rightID);
+        
+            await updateDoc(rightRef, {
+              elo: playerTwoRating,
+            });
+          } catch (error) {
+            console.error("Error updating document: ", error);
+          }
     }
 
     function handleLeft() {
@@ -87,12 +116,13 @@ export default function Home() {
     }
 
     function handleTie() {
-        if (winner == -1) {
+        if (winner == -1) { // Tie
             setWinner(0);
             setPlayerOneDiff(0);
             setPlayerTwoDiff(0);
-        } else {
+        } else { // Next
             setWinner(-1);
+            getTakes();
         }
     }
 
@@ -100,14 +130,18 @@ export default function Home() {
         getTakes();
     }, []);
 
+    useEffect(() => {
+        postElo();
+    }, [playerOneRating, playerTwoRating]);
+
 
     return (
         <React.Fragment>
             <TopNav />
             <div className="flex justify-center m-[25px] md:m-[50px]">
                 <div>
-                    <Typography sx={{ typography: { xs: 'h3', lg: 'h1' } }} style={{ fontWeight: 700 }} className="text-center ">Rank The People's Hottest Takes</Typography>
-                    <Typography sx={{ typography: { xs: 'h4', lg: 'h2' } }} style={{ fontWeight: 700 }} className="text-center ">Which one's the Hottest?</Typography>
+                    <Typography sx={{ typography: { xs: 'h3', lg: 'h1' } }} style={{ fontWeight: 700 }} className="text-center ">Rank The People&apos;s Hottest Takes</Typography>
+                    <Typography sx={{ typography: { xs: 'h4', lg: 'h2' } }} style={{ fontWeight: 700 }} className="text-center ">Which one&apos;s the Hottest?</Typography>
                 </div>
             </div>
             <div className="grid grid-cols-12 gap-4 min-h-[500px]">

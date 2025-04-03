@@ -1,6 +1,6 @@
 import TopNav from "@/components/TopNav";
 import { Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { ChangeEvent, MouseEvent, useState } from "react";
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
@@ -12,7 +12,7 @@ const Take = () => {
 
     async function addTake() {
         try {
-            const docRef = await addDoc(collection(db, "Takes"), {
+            await addDoc(collection(db, "Takes"), {
               content: take,
               elo: 1000,
               createdAt: new Date()
@@ -22,11 +22,11 @@ const Take = () => {
           }
     }
 
-    function handleChange(event:any) {
+    function handleChange(event:ChangeEvent<HTMLInputElement>) {
         setTake(event.target.value);
     }
 
-    function handleSubmit(event:any) {
+    function handleSubmit(event:MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         addTake();
         setTake('');
