@@ -8,6 +8,9 @@ import EloRank from "elo-rank";
 import { collection, doc, updateDoc, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebase";
 
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../lib/firebase";
+
 interface TakeType {
     content: string;
     createdAt: Date;
@@ -106,6 +109,12 @@ export default function Home() {
         console.log('clicked left!');
         console.log(`Old: ${playerOneRating}(${playerOneDiff}) | ${playerTwoRating}(${playerTwoDiff})`);
         calculateNewRatings(1);
+
+        if (analytics) {
+          logEvent(analytics, "button_click", {
+            button_name: "Left Button",
+          });
+        }
     }
 
     function handleRight() {
@@ -113,6 +122,12 @@ export default function Home() {
         console.log('clicked right!');
         console.log(`Old: ${playerOneRating}(${playerOneDiff}) | ${playerTwoRating}(${playerTwoDiff})`);
         calculateNewRatings(2);
+
+        if (analytics) {
+          logEvent(analytics, "button_click", {
+            button_name: "Right Button",
+          });
+        }
     }
 
     function handleTie() {
@@ -120,14 +135,29 @@ export default function Home() {
             setWinner(0);
             setPlayerOneDiff(0);
             setPlayerTwoDiff(0);
+
+            if (analytics) {
+              logEvent(analytics, "button_click", {
+                button_name: "Tie Button",
+              });
+            }
         } else { // Next
             setWinner(-1);
             getTakes();
+
+            if (analytics) {
+              logEvent(analytics, "button_click", {
+                button_name: "Next Button",
+              });
+            }
         }
     }
 
     useEffect(() => {
         getTakes();
+        if (analytics) {
+          logEvent(analytics, "page_view", { page_path: '/' });
+        }
     }, []);
 
     useEffect(() => {

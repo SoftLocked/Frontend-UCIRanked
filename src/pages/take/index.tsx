@@ -1,14 +1,23 @@
 import TopNav from "@/components/TopNav";
 import { Typography } from "@mui/material";
-import React, { ChangeEvent, MouseEvent, useState } from "react";
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
+
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../../lib/firebase";
 
 
 const Take = () => {
 
     const [take, setTake] = useState('');
+
+    useEffect(() => {
+        if (analytics) {
+            logEvent(analytics, "page_view", { page_path: '/take' });
+        }
+    }, []);
 
     async function addTake() {
         try {
@@ -30,6 +39,11 @@ const Take = () => {
         event.preventDefault();
         addTake();
         setTake('');
+        if (analytics) {
+            logEvent(analytics, "button_click", {
+                button_name: "Submit Button",
+            });
+        }
     }
 
     return (
