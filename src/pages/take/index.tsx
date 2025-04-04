@@ -7,9 +7,12 @@ import { db } from "../../lib/firebase";
 
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../../lib/firebase";
+import SuccessFailure from "@/components/SuccessFailure";
 
 
 const Take = () => {
+
+    const [success, setSuccess] = useState(-1);
 
     const [take, setTake] = useState('');
 
@@ -22,7 +25,7 @@ const Take = () => {
     async function addTake() {
         try {
             await addDoc(collection(db, "Takes"), {
-              content: take,
+              content: take.trim(),
               elo: 1000,
               createdAt: new Date()
             });
@@ -37,8 +40,14 @@ const Take = () => {
 
     function handleSubmit(event:MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        addTake();
-        setTake('');
+        if (take.trim().length <= 50 && take.trim().length > 0) {
+            addTake();
+            setTake('');
+            setSuccess(1);
+        } else {
+            setSuccess(0);
+        }
+        
         if (analytics) {
             logEvent(analytics, "button_click", {
                 button_name: "Submit Button",
@@ -63,6 +72,10 @@ const Take = () => {
                         <button className="text-white absolute end-2.5 bottom-2.5 ring-1 font-medium rounded-lg text-sm px-4 py-2 transition duration-500 ease-in-out hover:bg-white hover:text-black" onClick={handleSubmit}>Submit</button>
                     </div>
                 </form>
+            </div>
+
+            <div className="flex justify-center">
+                <SuccessFailure success={success}/>
             </div>
         </React.Fragment>
      );
