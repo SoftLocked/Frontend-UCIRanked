@@ -184,7 +184,7 @@ export default function Home() {
                     </div>
                 }
                 <div className="col-span-full md:col-span-4 flex flex-col gap-4 justify-center items-center text-center">
-                    <button className="border-2 border-blue-400 rounded-2xl p-10 cursor-pointer transition duration-500 ease-in-out hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-2xl w-[200px]" onClick={handleTie}><Typography variant="h3" style={{ fontWeight: 700 }}>{winner == -1 ? "Tie" : "Next"}</Typography></button>
+                    <button className="border-2 border-blue-400 rounded-2xl p-10 cursor-pointer transition duration-500 ease-in-out hover:bg-blue-400 dark:text-white font-bold py-2 px-4 rounded-2xl w-[200px]" onClick={handleTie}><Typography variant="h3" style={{ fontWeight: 700 }}>{winner == -1 ? "Tie" : "Next"}</Typography></button>
                 </div>
                 {winner < 0 ?
                     <div className="col-span-full md:col-span-4 m-10" onClick={handleRight}>

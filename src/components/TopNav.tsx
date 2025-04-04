@@ -14,7 +14,7 @@ const TopNav = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="text-white p-4">
+    <nav className="dark:text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">Hottake Ranked</Link>
         <ul className="hidden md:flex space-x-6">

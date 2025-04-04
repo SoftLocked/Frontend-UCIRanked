@@ -2,19 +2,26 @@ import TopNav from "@/components/TopNav";
 import { Typography } from "@mui/material";
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, limit, getDocs } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../../lib/firebase";
 import SuccessFailure from "@/components/SuccessFailure";
 
+interface TakeTypeNoID {
+    content: string;
+    createdAt: Date;
+    elo: number;
+}
 
 const Take = () => {
 
     const [success, setSuccess] = useState(-1);
 
     const [take, setTake] = useState('');
+
+    const [canTake, setCantake] = useState(true);
 
     useEffect(() => {
         if (analytics) {
@@ -34,16 +41,38 @@ const Take = () => {
           }
     }
 
+    async function checkIfTakeExists(take:string) {
+        try {
+            const collectionRef = collection(db, "Takes");
+            const q = query(collectionRef, where("content", "==", take), limit(1));
+        
+            const snapshot = await getDocs(q)
+
+            const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...(doc.data() as TakeTypeNoID) }));
+
+            return docs.length == 1;
+
+        } catch (error) {
+        console.error("Error getting documents:", error);
+        }
+      }
+
     function handleChange(event:ChangeEvent<HTMLInputElement>) {
         setTake(event.target.value);
     }
 
-    function handleSubmit(event:MouseEvent<HTMLButtonElement>) {
+    async function handleSubmit(event:MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        if (take.trim().length <= 50 && take.trim().length > 0) {
+
+        const exists = await checkIfTakeExists(take.trim());
+
+        if (take.trim().length <= 50 && take.trim().length > 0 && exists == false && canTake == true) {
+            console.log('exists', exists);
             addTake();
             setTake('');
             setSuccess(1);
+            setCantake(false);
+            setTimeout(() => {setCantake(true)}, 10000);
         } else {
             setSuccess(0);
         }
@@ -68,8 +97,8 @@ const Take = () => {
                 <form className="w-[100vw] md:w-[50vw]">   
                     <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">
-                        <input type="text" value={take} className="block w-full p-4 text-sm border-b-2 border-white placeholder-gray-50" placeholder="Make your Take" required style={{outline: 'none'}} onChange={handleChange}/>
-                        <button className="text-white absolute end-2.5 bottom-2.5 ring-1 font-medium rounded-lg text-sm px-4 py-2 transition duration-500 ease-in-out hover:bg-white hover:text-black" onClick={handleSubmit}>Submit</button>
+                        <input type="text" value={take} className=" dark:text-white block w-full p-4 text-sm border-b-2 border-black dark:border-white placeholder-black dark:placeholder-gray-50" placeholder="Make your Take" required style={{outline: 'none'}} onChange={handleChange}/>
+                        <button className="dark:text-white absolute end-2.5 bottom-2.5 ring-1 font-medium rounded-lg text-sm px-4 py-2 transition duration-500 ease-in-out hover:bg-white hover:text-black" onClick={handleSubmit}>Submit</button>
                     </div>
                 </form>
             </div>
