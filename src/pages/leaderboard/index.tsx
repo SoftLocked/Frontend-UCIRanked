@@ -62,7 +62,7 @@ const Leaderboard = () => {
                         </div>
                     </div>
                     {takes.map((take, index) => (
-                        <LeaderboardItem position={index+1} content={take.content} elo={take.elo}/>
+                        <LeaderboardItem key={index} position={index+1} content={take.content} elo={take.elo}/>
                     ))}
                     
                 </div>

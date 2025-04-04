@@ -11,7 +11,7 @@ interface MyComponentProps {
 const ResultCard: React.FC<MyComponentProps> = ({position, winner, rating, diff}) => {
 
     
-    let diffStr = `${diff >= 0 ? '+' : ''}${diff}`;
+    const diffStr = `${diff >= 0 ? '+' : ''}${diff}`;
 
     if (winner == 0) {
         return (

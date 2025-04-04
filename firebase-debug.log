@@ -1,0 +1,106 @@
+[debug] [2025-04-04T08:28:34.580Z] ----------------------------------------------------------------------
+[debug] [2025-04-04T08:28:34.583Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hariv\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-04-04T08:28:34.583Z] CLI Version:   14.1.0
+[debug] [2025-04-04T08:28:34.584Z] Platform:      win32
+[debug] [2025-04-04T08:28:34.584Z] Node Version:  v20.11.1
+[debug] [2025-04-04T08:28:34.584Z] Time:          Fri Apr 04 2025 01:28:34 GMT-0700 (Pacific Daylight Time)
+[debug] [2025-04-04T08:28:34.584Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-04T08:28:34.587Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-04-04T08:28:34.812Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-04T08:28:34.813Z] > authorizing via signed-in user (harivardhineedi@gmail.com)
+[debug] [2025-04-04T08:28:34.813Z] [iam] checking project hottake-ranked for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-04-04T08:28:34.814Z] Checked if tokens are valid: false, expires at: 1743673022300
+[debug] [2025-04-04T08:28:34.814Z] Checked if tokens are valid: false, expires at: 1743673022300
+[debug] [2025-04-04T08:28:34.814Z] > refreshing access token with scopes: []
+[debug] [2025-04-04T08:28:34.815Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-04-04T08:28:34.815Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-04T08:28:34.967Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-04-04T08:28:34.967Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-04-04T08:28:34.975Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-04-04T08:28:34.975Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-04T08:28:34.982Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions [none]
+[debug] [2025-04-04T08:28:34.982Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions x-goog-quota-user=projects/hottake-ranked
+[debug] [2025-04-04T08:28:34.982Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-04T08:28:35.211Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions 200
+[debug] [2025-04-04T08:28:35.211Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-04T08:28:35.212Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:35.212Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:35.212Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked [none]
+[debug] [2025-04-04T08:28:35.580Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked 200
+[debug] [2025-04-04T08:28:35.580Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked {"projectId":"hottake-ranked","projectNumber":"729885863876","displayName":"Hottake Ranked","name":"projects/hottake-ranked","resources":{"hostingSite":"hottake-ranked"},"state":"ACTIVE","etag":"1_ebe478ef-8e54-42b3-9937-942a60e8d093"}
+[debug] [2025-04-04T08:28:39.313Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:39.314Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:39.314Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites pageToken=&pageSize=10
+[debug] [2025-04-04T08:28:40.111Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites 200
+[debug] [2025-04-04T08:28:40.111Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites {"sites":[{"name":"projects/hottake-ranked/sites/hottake-ranked","defaultUrl":"https://hottake-ranked.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-04-04T08:28:40.111Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:40.111Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:40.111Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites 
+[debug] [2025-04-04T08:28:40.667Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites 200
+[debug] [2025-04-04T08:28:40.667Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites {"sites":[{"name":"projects/hottake-ranked/sites/hottake-ranked","defaultUrl":"https://hottake-ranked.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-04-04T08:28:40.667Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:40.667Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:40.667Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked/webApps/-/config [none]
+[debug] [2025-04-04T08:28:41.045Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked/webApps/-/config 200
+[debug] [2025-04-04T08:28:41.045Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked/webApps/-/config {"projectId":"hottake-ranked","storageBucket":"hottake-ranked.firebasestorage.app","apiKey":"AIzaSyBP2r_ZnetVEzZW3dkVUIxNmP0cfl3_vI4","authDomain":"hottake-ranked.firebaseapp.com","messagingSenderId":"729885863876"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-04-04T08:28:49.241Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:49.242Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:28:49.242Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites/hottake-ranked [none]
+[debug] [2025-04-04T08:28:49.819Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites/hottake-ranked 200
+[debug] [2025-04-04T08:28:49.819Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/hottake-ranked/sites/hottake-ranked {"name":"projects/hottake-ranked/sites/hottake-ranked","defaultUrl":"https://hottake-ranked.web.app","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 15.2.4
+
+[info]    - Environments: .env.local
+
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+Failed to compile.
+
+[info] 
+./src/components/ResultCard.tsx
+14:9  Error: 'diffStr' is never reassigned. Use 'const' instead.  prefer-const
+
+./src/pages/leaderboard/index.tsx
+65:25  Error: Missing "key" prop for element in iterator  react/jsx-key
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+
+[debug] [2025-04-04T08:28:55.184Z] Error: ENOENT: no such file or directory, open 'C:\Users\hariv\CODE\Web\UCIRanked\Frontend-UCIRanked\.next\server\middleware-manifest.json'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-04-04T08:29:51.045Z] ----------------------------------------------------------------------
+[debug] [2025-04-04T08:29:51.047Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hariv\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-04-04T08:29:51.047Z] CLI Version:   14.1.0
+[debug] [2025-04-04T08:29:51.048Z] Platform:      win32
+[debug] [2025-04-04T08:29:51.048Z] Node Version:  v20.11.1
+[debug] [2025-04-04T08:29:51.048Z] Time:          Fri Apr 04 2025 01:29:51 GMT-0700 (Pacific Daylight Time)
+[debug] [2025-04-04T08:29:51.048Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-04T08:29:51.230Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-04T08:29:51.230Z] > authorizing via signed-in user (harivardhineedi@gmail.com)
+[debug] [2025-04-04T08:29:51.230Z] [iam] checking project hottake-ranked for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-04-04T08:29:51.231Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:29:51.232Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:29:51.232Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions [none]
+[debug] [2025-04-04T08:29:51.233Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions x-goog-quota-user=projects/hottake-ranked
+[debug] [2025-04-04T08:29:51.233Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-04T08:29:51.501Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions 200
+[debug] [2025-04-04T08:29:51.501Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/hottake-ranked:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-04T08:29:51.501Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:29:51.502Z] Checked if tokens are valid: true, expires at: 1743758913975
+[debug] [2025-04-04T08:29:51.502Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked [none]
+[debug] [2025-04-04T08:29:51.838Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/hottake-ranked 200
