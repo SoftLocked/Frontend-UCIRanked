@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics, isSupported, Analytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 // Your Firebase Config (From Firebase Console)
 const firebaseConfig = {
@@ -29,4 +30,8 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { app, db , analytics};
+const auth = getAuth(app)
+
+const provider = new GoogleAuthProvider();
+
+export { app, db , analytics, auth, provider};

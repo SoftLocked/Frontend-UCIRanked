@@ -8,6 +8,9 @@ import TopNav from "@/components/TopNav";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 
+import { useRouter } from 'next/router';
+import { useAuth } from '../../hooks/useAuth';
+
 interface TakeTypeNoID {
     content: string;
     createdAt: Date;
@@ -21,6 +24,9 @@ interface TakeType {
 }
 
 const Leaderboard = () => {
+
+    const { user, loading } = useAuth();
+    const router = useRouter();
 
     const [takes, setTakes] = useState<TakeType[]>([]);
 
@@ -39,11 +45,19 @@ const Leaderboard = () => {
     }
 
     useEffect(() => {
+        if (!user && !loading) router.push('/login');
+    }, [user, loading]);
+
+    useEffect(() => {
         if (analytics) {
             logEvent(analytics, "page_view", { page_path: '/leaderboard' });
         }
         getTop100();
     }, []);
+
+    if (loading) {
+        return <h1>Loading...</h1>;
+    }
 
     return ( 
         <React.Fragment>
