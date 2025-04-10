@@ -185,7 +185,7 @@ export default function Home() {
       <div className="flex justify-center m-[25px] md:m-[50px]">
         <div>
           <Typography sx={{ typography: { xs: 'h3', lg: 'h1' } }} style={{ fontWeight: 700 }} className="text-center ">Rank The People&apos;s Hottest Takes</Typography>
-          <Typography sx={{ typography: { xs: 'h4', lg: 'h2' } }} style={{ fontWeight: 700 }} className="text-center ">Which one&apos;s the Hottest?</Typography>
+          <Typography sx={{ typography: { xs: 'h4', lg: 'h2' } }} style={{ fontWeight: 700 }} className="text-center ">Which one do you agree with more?</Typography>
         </div>
       </div>
       <div className="grid grid-cols-12 gap-4 min-h-[500px]">
